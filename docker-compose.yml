@@ -1,0 +1,8 @@
+version: '3'
+services:
+  python-container:
+    image: cdtm-wall:latest
+    ports:
+      - "5004:8080"
+    environment:
+      - ENVIRONMENT=local
