@@ -1,9 +1,3 @@
-# Prostate Backend
+# CDTM WALL
 
-## Environment variables
-
-```
-ELASTIC_SERACH_HOST=XXX
-ELASTIC_SERACH_USERNAME=XXX
-ELASTIC_SERACH_PASSWORD=XXX
-```
+* MVG Hauptbahnhof

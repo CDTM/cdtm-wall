@@ -198,9 +198,9 @@
         (function ($) {
 
 
-            var PORT = 8080;
-            //var HOST = "http://" + document.domain;
-            var HOST = "http://" + "localhost";
+            var PORT = "";
+            var HOST = location.protocol + "://" + document.domain;
+            //var HOST = "http://" + "localhost";
 
             var ENDPOINT = HOST + ":" + PORT;
 
