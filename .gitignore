@@ -24,8 +24,6 @@ htmlcov/
 .coverage.*
 *,cover
 .idea
-CREDENTIALS.md
-docker-compose.yml
 *.tar
 credentials.json
 node_modules/*
