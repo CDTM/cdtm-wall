@@ -201,11 +201,7 @@
         (function ($) {
 
 
-            var PORT = "";
-            var HOST = "/";
-            //var HOST = "http://" + "localhost";
-
-            var ENDPOINT = HOST;
+            var ENDPOINT =location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
 
             var getPhotos = function () {
                 $(document).ready(function () {
