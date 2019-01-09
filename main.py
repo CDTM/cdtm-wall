@@ -1,6 +1,7 @@
 # app.py
 import time
 import gevent.monkey
+import os
 
 gevent.monkey.patch_all()
 from flask import Flask, send_from_directory, jsonify
@@ -16,10 +17,13 @@ CORS(app)
 
 socketio = SocketIO(app)
 
+# Define the static directory
+static_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'static')
 
-@app.route('/')
-def root():
-    return app.send_static_file('./static/index.html')
+
+@app.route('/', methods=['GET'])
+def serve_dir_directory_index():
+    return send_from_directory(static_file_dir, 'index.html')
 
 
 @app.route("/api/mvg")
