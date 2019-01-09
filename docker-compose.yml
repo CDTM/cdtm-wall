@@ -3,6 +3,6 @@ services:
   python-container:
     image: cdtm-wall:latest
     ports:
-      - "5004:8080"
+      - "5003:5003"
     environment:
       - ENVIRONMENT=local
