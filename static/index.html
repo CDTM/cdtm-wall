@@ -69,14 +69,17 @@
             background: #15bfe9;
             color: #ffffff;
         }
+
         .label-S4 {
             background: #ff0011;
             color: #ffffff;
         }
+
         .label-S7 {
             background: #942929;
             color: #ffffff;
         }
+
         .label-S8 {
             background: #241f20;
             color: #ffffff;
@@ -202,7 +205,7 @@
             var HOST = location.protocol + "://" + document.domain;
             //var HOST = "http://" + "localhost";
 
-            var ENDPOINT = HOST + ":" + PORT;
+            var ENDPOINT = HOST;
 
             var getPhotos = function () {
                 $(document).ready(function () {
@@ -256,7 +259,7 @@
 
             /* SOCKETS */
 
-            var socket = io.connect(ENDPOINT);
+            var socket = io.connect(document.domain);
             socket.on('connect', function () {
                 socket.emit('my event', {data: 'I\'m connected!'});
             });
