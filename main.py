@@ -50,4 +50,4 @@ def socket_welcome_emit(name):
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True, port=5003)
+    socketio.run(app, debug=True, port=5003, host='0.0.0.0')
