@@ -206,7 +206,7 @@
             var getPhotos = function () {
                 $(document).ready(function () {
                     $.ajax({
-                        url: ENDPOINT + "/photos"
+                        url: ENDPOINT + "/api/photos"
                     }).then(function (data) {
                         console.log(data)
 
@@ -216,7 +216,7 @@
             var getMVG = function () {
                 $(document).ready(function () {
                     $.ajax({
-                        url: ENDPOINT + "/mvg"
+                        url: ENDPOINT + "/api/mvg"
                     }).then(function (data) {
                         content = {};
                         // console.log(data);
