@@ -202,7 +202,7 @@
 
 
             var PORT = "";
-            var HOST = location.protocol + "://" + document.domain;
+            var HOST = "/";
             //var HOST = "http://" + "localhost";
 
             var ENDPOINT = HOST;
@@ -259,7 +259,7 @@
 
             /* SOCKETS */
 
-            var socket = io.connect(document.domain);
+            var socket = io.connect("/");
             socket.on('connect', function () {
                 socket.emit('my event', {data: 'I\'m connected!'});
             });
