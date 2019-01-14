@@ -218,6 +218,7 @@
                     $.ajax({
                         url: ENDPOINT + "/api/mvg"
                     }).then(function (data) {
+                        var now = new Date();
                         content = {};
                         // console.log(data);
                         if (data.mvg) {
@@ -225,11 +226,12 @@
                             content['mvg'] = "<table>";
                             for (var i = 0; i < data.mvg.length; i++) {
                                 var departureTime = new Date(data.mvg[i].departureTime);
+                                var diffMs = (departureTime-now);
                                 // console.log(data.mvg[i]);
                                 content['mvg'] += "<tr>";
                                 content['mvg'] += "<td><span class='label label-" + data.mvg[i].label + " " + data.mvg[i].product + "'>" + data.mvg[i].label + "</span></td>";
                                 content['mvg'] += "<td>" + data.mvg[i].destination + "</td>";
-                                content['mvg'] += "<td>" + departureTime.toLocaleTimeString() + "</td>";
+                                content['mvg'] += "<td>" + Math.round(((diffMs % 86400000) % 3600000) / 60000) + " min</td>"; // minutesdepartureTime.toLocaleTimeString()
                                 content['mvg'] += "</tr>";
                             }
                             content['mvg'] += "</table>";
