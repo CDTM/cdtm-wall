@@ -25,6 +25,7 @@
         #main {
             height: 100vh;
             overflow: hidden;
+            font-size: 90%;
         }
 
         .logo {
@@ -55,6 +56,16 @@
             color: #ffffff;
         }
 
+        .label-U7 {
+            background: #c40c37;
+            color: #ffffff;
+        }
+
+        .label-U8 {
+            background: #c40c37;
+            color: #ffffff;
+        }
+
         .label-U4 {
             background: #0ab38d;
             color: #ffffff;
@@ -70,9 +81,29 @@
             color: #ffffff;
         }
 
+        .label-S2 {
+            background: #70bf44;
+            color: #ffffff;
+        }
+
+        .label-S3 {
+            background: #7b107c;
+            color: #ffffff;
+        }
+
         .label-S4 {
             background: #ff0011;
             color: #ffffff;
+        }
+
+        .label-S5 {
+            background: #ffcd01;
+            color: #000;
+        }
+
+        .label-S6 {
+            background: #008a51;
+            color: #fff;
         }
 
         .label-S7 {
@@ -82,6 +113,11 @@
 
         .label-S8 {
             background: #241f20;
+            color: #ffffff;
+        }
+
+        .label-S20 {
+            background: #f05a73;
             color: #ffffff;
         }
 
@@ -176,7 +212,7 @@
             <div class="col-xs-2">
                 <div class="logo" style="padding-left: 28px;">
                     <img src="https://www.cdtm.de/wp-content/uploads/2018/03/2017_CDTM_Logo_with-claim_blue_incl-protected-without-area_smallv02.png"
-                         alt="" width="150px">
+                         alt="" width="100px">
                 </div>
             </div>
         </div>
@@ -184,7 +220,6 @@
             <div class="col-md-4">
                 <div class="padding">
                     <h4>Departure Hauptbahnhof</h4>
-                    <h6>Walking distance: 8 min</h6>
                     <div class="cdtm-mvg"></div>
                 </div>
             </div>
@@ -201,7 +236,7 @@
         (function ($) {
 
 
-            var ENDPOINT =location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+            var ENDPOINT = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
 
             var getPhotos = function () {
                 $(document).ready(function () {
@@ -216,22 +251,22 @@
             var getMVG = function () {
                 $(document).ready(function () {
                     $.ajax({
-                        url: ENDPOINT + "/api/mvg"
+                        url: ENDPOINT + "/api/mvg/6?walking_distance=8"
                     }).then(function (data) {
                         var now = new Date();
                         content = {};
                         // console.log(data);
                         if (data.mvg) {
 
-                            content['mvg'] = "<table>";
+                            content['mvg'] = "<table style='width:100%'>";
                             for (var i = 0; i < data.mvg.length; i++) {
                                 var departureTime = new Date(data.mvg[i].departureTime);
-                                var diffMs = (departureTime-now);
+                                var diffMs = (departureTime - now);
                                 // console.log(data.mvg[i]);
                                 content['mvg'] += "<tr>";
                                 content['mvg'] += "<td><span class='label label-" + data.mvg[i].label + " " + data.mvg[i].product + "'>" + data.mvg[i].label + "</span></td>";
                                 content['mvg'] += "<td>" + data.mvg[i].destination + "</td>";
-                                content['mvg'] += "<td>" + Math.round(((diffMs % 86400000) % 3600000) / 60000) + " min</td>"; // minutesdepartureTime.toLocaleTimeString()
+                                content['mvg'] += "<td style='text-alight:right;'>" + Math.round(((diffMs % 86400000) % 3600000) / 60000) + " min</td>"; // minutesdepartureTime.toLocaleTimeString()
                                 content['mvg'] += "</tr>";
                             }
                             content['mvg'] += "</table>";

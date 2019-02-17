@@ -4,10 +4,10 @@ import gevent.monkey
 import os
 
 gevent.monkey.patch_all()
-from flask import Flask, send_from_directory, jsonify
+from flask import Flask, send_from_directory, jsonify, request
 from flask_socketio import SocketIO
 
-from mvg import get_hauptbahnhof
+from mvg import get_departures
 from owncloud import get_photos
 from flask_cors import CORS
 
@@ -26,10 +26,12 @@ def serve_dir_directory_index():
     return send_from_directory(static_file_dir, 'index.html')
 
 
-@app.route("/api/mvg")
-def rest_get_mvg():
+@app.route("/api/mvg/<int:station>")
+def rest_get_mvg(station):
     response = dict()
-    response["mvg"] = get_hauptbahnhof()
+    walking_distance = request.args.get('walking_distance', default=8)
+    # hauptbahnhof is station with id 6
+    response["mvg"] = get_departures(station, walking_distance)
     # return response
     return jsonify(response)
 
