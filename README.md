@@ -14,6 +14,8 @@ Very simple html file
 * jQuery
 * Socket io
 
+The TV Stick / browser is using HD Ready Resolution despite the TV being Full HD capable.
+
 
 ## Backend 
 
