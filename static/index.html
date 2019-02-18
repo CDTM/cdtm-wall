@@ -6,18 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="refresh" content="3600">
     <title>CDTM · Wall</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
             crossorigin="anonymous"></script>
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.slim.js"></script>
     <style type="text/css">
+
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: Arial;
+        }
+
         h1, h2, h3, h4, h5, h6 {
             color: #013f9a;
         }
@@ -26,11 +29,54 @@
             height: 100vh;
             overflow: hidden;
             font-size: 90%;
+            position: relative;
         }
 
-        .logo {
+        .top {
+            height: 50px;
             padding: 10px;
-            width: 100%;
+            left: 0;
+            right: 0;
+            top: 0;
+        }
+
+        .left {
+            position: absolute;
+            width: 280px;
+            left: 0;
+            top: 60px;
+            bottom: 0;
+            padding: 10px;
+        }
+
+        .left table td.type {
+            width: 15px;
+        }
+
+        .left table td.type-name {
+            width: 15px;
+        }
+
+        .left table td.station-name {
+            white-space: nowrap;
+            width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .left table td.time {
+            width: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .right {
+            position: absolute;
+            width: 1620px;
+            right: 0;
+            top: 0;
+            bottom: 0;
         }
 
         .padding {
@@ -42,7 +88,7 @@
             display: block;
             padding: 3px 3px 5px 20px;
             text-align: center;
-            width: 60px;
+            width: 30px;
             position: relative;
         }
 
@@ -207,28 +253,21 @@
 
 <body>
 <div id="main">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-2">
-                <div class="logo" style="padding-left: 28px;">
-                    <img src="https://www.cdtm.de/wp-content/uploads/2018/03/2017_CDTM_Logo_with-claim_blue_incl-protected-without-area_smallv02.png"
-                         alt="" width="100px">
-                </div>
-            </div>
+    <div class="top">
+        <div class="logo">
+            <img src="https://www.cdtm.de/wp-content/uploads/2018/03/2017_CDTM_Logo_with-claim_blue_incl-protected-without-area_smallv02.png"
+                 alt="" width="100px">
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="padding">
-                    <h4>Departure Hauptbahnhof</h4>
-                    <div class="cdtm-mvg"></div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <script src="https://walls.io/js/wallsio-widget-1.2.js"
-                        data-wallurl="https://walls.io/c55ib?show_header=0" data-width="100%" data-height="800"
-                        data-lazyload="1"></script>
-            </div>
-        </div>
+    </div>
+    <div class="left">
+        <h4>Departure Hauptbahnhof</h4>
+        <div class="cdtm-mvg"></div>
+
+    </div>
+    <div class="right">
+        <script src="https://walls.io/js/wallsio-widget-1.2.js"
+                data-wallurl="https://walls.io/c55ib?show_header=0" data-width="100%" data-height="800"
+                data-lazyload="1"></script>
     </div>
     <script type="text/javascript">
 
@@ -258,15 +297,15 @@
                         // console.log(data);
                         if (data.mvg) {
 
-                            content['mvg'] = "<table style='width:100%'>";
+                            content['mvg'] = "<table>";
                             for (var i = 0; i < data.mvg.length; i++) {
                                 var departureTime = new Date(data.mvg[i].departureTime);
                                 var diffMs = (departureTime - now);
                                 // console.log(data.mvg[i]);
                                 content['mvg'] += "<tr>";
-                                content['mvg'] += "<td><span class='label label-" + data.mvg[i].label + " " + data.mvg[i].product + "'>" + data.mvg[i].label + "</span></td>";
-                                content['mvg'] += "<td>" + data.mvg[i].destination + "</td>";
-                                content['mvg'] += "<td style='text-alight:right;'>" + Math.round(((diffMs % 86400000) % 3600000) / 60000) + " min</td>"; // minutesdepartureTime.toLocaleTimeString()
+                                content['mvg'] += "<td class='type'><span class='label label-" + data.mvg[i].label + " " + data.mvg[i].product + "'>" + data.mvg[i].label + "</span></td>";
+                                content['mvg'] += "<td class='station-name'>" + data.mvg[i].destination + "</td>";
+                                content['mvg'] += "<td class='time'>" + Math.round(((diffMs % 86400000) % 3600000) / 60000) + " min</td>"; // minutesdepartureTime.toLocaleTimeString()
                                 content['mvg'] += "</tr>";
                             }
                             content['mvg'] += "</table>";
