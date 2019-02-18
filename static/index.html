@@ -42,11 +42,16 @@
 
         .left {
             position: absolute;
-            width: 280px;
+            width: 20%;
             left: 0;
             top: 60px;
             bottom: 0;
             padding: 10px;
+        }
+
+        .left table {
+            table-layout: fixed;
+            border-collapse: collapse;
         }
 
         .left table td.type {
@@ -58,9 +63,10 @@
         }
 
         .left table td.station-name {
-            white-space: nowrap;
-            width: 150px;
+            display: block;
+            width: 250px;
             overflow: hidden;
+            white-space: nowrap;
             text-overflow: ellipsis;
         }
 
@@ -73,7 +79,7 @@
 
         .right {
             position: absolute;
-            width: 1620px;
+            width: 80%;
             right: 0;
             top: 0;
             bottom: 0;
